@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend</title>
+</head>
+<body>
+    <h1>Subir archivos:</h1>
+    <form action="http://localhost:8080/files" id="form" method="POST" enctype="multipart/form-data">
+        <input type="file" name="avatar" id="avatar">
+        <input type="submit" value="Send">
+    </form>
+
+     <script>
+        document.querySelector("#form").addEventListener("submit", (ev)=>{
+            ev.preventDefault();
+
+            let formData = new FormData();
+            let file = document.querySelector("#avatar").files[0];
+
+            formData.append("avatar", file);
+
+            fetch("http://localhost:8080/files",{
+                method: "POST",
+                body: formData
+            }).then(
+                r => r.text()
+            ).then(data => alert(data)).catch(error => console.log(error));
+
+            return false;
+        })
+    </script>
+</body>
+</html>
