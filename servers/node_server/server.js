@@ -1,29 +1,20 @@
 const express = require('express');
+const morgan = require('morgan');
 const app = express();
-const multer = require('multer');
-const mimeTypes = require('mime-types');
-const cors = require('cors');
 
-app.use(cors());
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+app.use(morgan('tiny'));
 
-const storage = multer.diskStorage({
-    destination: 'uploads/',
-    filename: function(req, file, cb){
-        cb("", Date.now() + file.originalname + "." + mimeTypes.extension(file.mimetype));
-    }
-})
-const upload = multer({
-    storage: storage
-})
+let f = (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.send({
+        hola: "mundo"
+    });
+}
 
-app.get("/", (req,res) => {
-    console.log(__dirname)
-    res.sendFile(__dirname + "/views/index.html");
-    
-})
-
-app.post("/files", upload.single('avatar'), (req,res) => {
-    res.send("Todo bien!");
-})
+app.get("/", f);
+app.post("/", f);
+app.put("/", f);
 
 app.listen(8080, ()=> console.log("Server started"));
