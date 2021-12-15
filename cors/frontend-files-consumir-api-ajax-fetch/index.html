@@ -7,10 +7,10 @@
     <title>Frontend CORS</title>
 </head>
 <body>
-    <h1>Peticiones simples CORS:</h1>
+    <h1>Peticiones preflight CORS:</h1>
     
      <script>
-         fetch("http://localhost:8080").then(
+         fetch("http://localhost:8080/", {method: "PUT"}).then(
              r => r.json()
          ).then(
              data => console.log(data)).catch(

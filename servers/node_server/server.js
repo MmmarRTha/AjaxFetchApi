@@ -13,6 +13,12 @@ let f = (req, res) => {
     });
 }
 
+app.options("/", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "PUT");
+    res.status(204).send();
+})
+
 app.get("/", f);
 app.post("/", f);
 app.put("/", f);
