@@ -16,6 +16,7 @@ let f = (req, res) => {
 app.options("/", (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "PUT");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authentication");
     res.status(204).send();
 })
 

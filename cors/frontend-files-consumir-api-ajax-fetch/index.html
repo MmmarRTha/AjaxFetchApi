@@ -10,12 +10,18 @@
     <h1>Peticiones preflight CORS:</h1>
     
      <script>
-         fetch("http://localhost:8080/", {method: "PUT"}).then(
-             r => r.json()
-         ).then(
-             data => console.log(data)).catch(
-             error => console.log(error)
-         );
+        fetch("http://localhost:8080/", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authentication": "Bearer 125uinsdfwedfs124512sdfse"
+            }
+            }).then(
+            r => r.json()
+        ).then(
+            data => console.log(data)).catch(
+            error => console.log(error)
+        );
     </script>
 </body>
 </html>
