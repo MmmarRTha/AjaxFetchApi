@@ -14,7 +14,27 @@ export class Todo {
         this.title = args.title;
         this.completed = args.completed;
         this.id = args.id;
+    }
 
+    save = async () => {
+        if(this.id)
+        return this.update();
 
+        this.create();
+    }
+
+    create = async () => {
+
+    }
+
+    update = async () => {
+        let response = await performer({
+            type: "update",
+            payload: {
+                id: this.id,
+                title: this.title
+            }
+        });
+        return response;
     }
 }

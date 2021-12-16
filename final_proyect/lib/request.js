@@ -11,8 +11,7 @@ export default (action) => {
         method: getMethod(action)
     }
 
-    return fetch(endpoint + getPath(action), options)
-    .then( r => r.json());
+    return fetch(endpoint + getPath(action), options).then( r => r.json());
     
 }
 
@@ -42,6 +41,6 @@ let getPath = (action) => {
         case "list":
             return `/${path}/${action.payload.id}`
         case "listAll":
-            return `/${path}`    
+            return `/${path}?_limit=10`    
     }
 }

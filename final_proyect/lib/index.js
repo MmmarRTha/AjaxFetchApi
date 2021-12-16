@@ -11,6 +11,7 @@ window.addEventListener("load", (ev) => {
             let node = buildDOMElement(todo);
             // Insert node in container
             container.prepend(node); 
+            editInPlace(node.querySelector("h1"), todo);
         });
 
     });
@@ -20,6 +21,30 @@ window.addEventListener("load", (ev) => {
         li.innerHTML = `
             <h1>${todo.title}</h1>
         `;
+
         return li;
+    }
+
+    let editInPlace = (node, todo) => {
+        node.addEventListener("click", (ev) => {
+            // Replace node for a text field
+            let inputText = document.createElement("textarea");
+            inputText.value = node.innerHTML;
+            inputText.autofocus = true;
+
+            node.replaceWith(inputText);
+
+            inputText.addEventListener("change", (ev) => {
+                inputText.replaceWith(node);
+                todo.title = inputText.value;
+
+                node.innerHTML = todo.title;
+                todo.save().then(r => console.log(r));
+            })
+
+
+            // Finish update: replace text field for a node again
+
+        })
     }
 })
