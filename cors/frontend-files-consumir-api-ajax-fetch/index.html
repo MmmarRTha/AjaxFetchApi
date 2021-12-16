@@ -7,15 +7,17 @@
     <title>Frontend CORS</title>
 </head>
 <body>
-    <h1>Peticiones preflight CORS:</h1>
+    <h1>Credenciales (cookies):</h1>
     
      <script>
+         document.cookie = "username=Martha";
         fetch("http://localhost:8080/", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 "Authentication": "Bearer 125uinsdfwedfs124512sdfse"
-            }
+            },
+            credentials:"include"
             }).then(
             r => r.json()
         ).then(
