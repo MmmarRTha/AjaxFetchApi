@@ -1,0 +1,10 @@
+li.close{
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    display: inline;
+    background-color: transparent;
+    border: 0;
+    font-size: 1em;
+    cursor: pointer;
+}

@@ -37,4 +37,14 @@ export class Todo {
         });
         return response;
     }
+
+    destroy = async () => {
+        let response = await performer({
+            type: "destroy",
+            payload: {
+                id: this.id,
+            }
+        });
+        return response;
+    }
 }

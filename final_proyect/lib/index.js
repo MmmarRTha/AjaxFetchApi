@@ -20,7 +20,13 @@ window.addEventListener("load", (ev) => {
         let li = document.createElement("li");
         li.innerHTML = `
             <h1>${todo.title}</h1>
+            <button class="close">X</button>
         `;
+
+        li.querySelector(".close").addEventListener("click",(ev) => {
+            todo.destroy();
+            li.remove();
+        })
 
         return li;
     }
