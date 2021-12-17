@@ -3,6 +3,26 @@ import { Todo } from '/lib/Todo.js';
 
 window.addEventListener("load", (ev) => {
     let container = document.querySelector("#root ul");
+
+    document.querySelector("#mainForm").addEventListener("submit", (ev) => {
+        ev.preventDefault();
+        const form = ev.target;
+        const textarea = form.querySelector("textarea");
+        const button = form.querySelector("[type='submit']");
+        button.disabled = true;
+
+        let todo = new Todo({title: textarea.value});
+
+        todo.save().then(() => {
+            textarea.value = "";
+            button.disabled = false;
+
+            let li = buildDOMElement(todo);
+            container.prepend(li);
+        });
+
+        return false;
+    })
     // Todo.all => return all web service's todos
     Todo.all().then(todos => {
         //  Iterate all todos
@@ -11,7 +31,7 @@ window.addEventListener("load", (ev) => {
             let node = buildDOMElement(todo);
             // Insert node in container
             container.prepend(node); 
-            editInPlace(node.querySelector("h1"), todo);
+            
         });
 
     });
@@ -27,7 +47,7 @@ window.addEventListener("load", (ev) => {
             todo.destroy();
             li.remove();
         })
-
+        editInPlace(li.querySelector("h1"), todo);
         return li;
     }
 

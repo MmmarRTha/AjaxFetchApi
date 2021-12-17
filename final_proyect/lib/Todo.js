@@ -24,7 +24,13 @@ export class Todo {
     }
 
     create = async () => {
-
+        let response = await performer({
+            type: "create",
+            payload: {
+                title: this.title
+            }
+        }).then(data => this.id = data.id);
+        return response;
     }
 
     update = async () => {
